@@ -1,1 +1,321 @@
+/*For index */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+    background-image: url("logo.jpg"); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #424242;
+    margin: 0 auto 20px;
+    border-radius: 20px; 
+}
+
+h1 {
+    margin: 10px 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.description {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    flex: 1;
+    min-width: 180px;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.btn-visitor {
+    background: #e9ecef;
+    color: #333;
+}
+
+.btn-staff {
+    background: rgb(42, 42, 42);
+    color: white;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.note {
+    font-size: 12px;
+    color: #777;
+    margin-top: 8px;
+}
+
+.footer {
+    margin-top: 25px;
+    font-size: 12px;
+    color: #999;
+}
+
+@media (max-width: 500px) {
+    .buttons {
+        flex-direction: column;
+    }
+    .btn {
+        width: 100%;
+    }
+}
+
+/*For Visitor*/
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 40px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+hr {
+    margin-bottom: 20px;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.form-row {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 20px; 
+    flex-wrap: wrap;
+    align-items: flex-end; 
+}
+
+.form-group {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 8px; 
+    color: #444;
+    font-weight: bold;
+    text-align: center; 
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box; 
+}
+
+textarea {
+    height: 100px;
+    resize: vertical; 
+}
+
+.buttons {
+    margin-top: 20px;
+    text-align: right; 
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px; 
+}
+
+.submit-btn {
+    background: #2e7d32; 
+    color: white;
+}
+
+.clear-btn {
+    background: #eee;
+    color: #333;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px); 
+}
+
+.note {
+    font-size: 12px;
+    color: #777;
+    margin-top: 10px;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .form-group {
+        width: 100%;
+    }
+    
+    label {
+        text-align: left;
+    }
+}
+
+/* For Visitor Confirmation Screen */
+
+#confirmationContainer {
+    display: none; 
+    background-color: #ffffff;
+    padding: 48px 40px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 550px;
+    text-align: center;
+    margin: 40px auto; 
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.icon-container {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 24px auto;
+}
+
+.icon-container svg {
+    width: 32px;
+    height: 32px;
+    color: #111827;
+}
+
+.confirmation-card h2 {
+    font-size: 1.5rem;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+    color: #111827;
+}
+
+.confirmation-card .subtitle {
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin: 0 0 32px 0;
+}
+
+.details-box {
+    background-color: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 24px;
+    text-align: left;
+    margin-bottom: 32px;
+}
+
+.detail-row {
+    display: flex;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.detail-row:last-child {
+    margin-bottom: 0;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #4b5563;
+    width: 120px;
+    flex-shrink: 0;
+}
+
+.detail-value {
+    color: #111827;
+}
+
+.btn-done {
+    background-color: #e5e7eb;
+    color: #1f2937;
+    border: 1px solid #d1d5db;
+    padding: 10px 40px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-done:hover {
+    background-color: #d1d5db;
+}
