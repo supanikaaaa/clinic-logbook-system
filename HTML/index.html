@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PLP ClinicConnect</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <div class="container">
+    <div class="logo"></div>
+
+    <h1>PLP ClinicConnect</h1>
+    <div class="subtitle">Digital Logbook and Patient Information System</div>
+
+    <hr>
+
+    <div class="description">
+      Welcome! Please select your role to continue.<br>
+      Visitors can log their clinic visit. Staff can manage patient records and logs.
+    </div>
+
+    <div class="buttons">
+      <div>
+        <button class="btn btn-visitor" onclick="selectRole('visitor')">
+          👤 Visitor Log In
+        </button>
+        <div class="note">Students & Guests</div>
+      </div>
+
+      <div>
+        <button class="btn btn-staff" onclick="selectRole('staff')">
+          🏥 Staff Login
+        </button>
+        <div class="note">Nurses & Administrators</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Secure & confidential • Need help? Contact clinic staff
+    </div>
+  </div>
+
+  <script>
+   function selectRole(role) {
+  document.body.style.opacity = "0.6";
+
+  setTimeout(() => {
+    if (role === "visitor") {
+      window.location.href = "visitor-login.html";
+    } else {
+      window.location.href = "staff-login.html";
+    }
+  }, 300);
+}
+  </script>
+
+</body>
+</html>
