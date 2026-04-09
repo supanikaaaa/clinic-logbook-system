@@ -1,1 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor page</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Hidden by default */
+        #confirmationContainer {
+            display: none; 
+            background-color: #ffffff;
+            padding: 48px 40px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+            margin: 40px auto; /* Centers the card on the page */
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
+        .icon-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 24px auto;
+        }
+        
+        .icon-container svg {
+            width: 32px;
+            height: 32px;
+            color: #111827;
+        }
+
+        .confirmation-card h2 {
+            font-size: 1.5rem;
+            margin: 0 0 8px 0;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .confirmation-card .subtitle {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin: 0 0 32px 0;
+        }
+
+        .details-box {
+            background-color: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 24px;
+            text-align: left;
+            margin-bottom: 32px;
+        }
+
+        .detail-row {
+            display: flex;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #4b5563;
+            width: 120px;
+            flex-shrink: 0;
+        }
+
+        .detail-value {
+            color: #111827;
+        }
+
+        .btn-done {
+            background-color: #e5e7eb;
+            color: #1f2937;
+            border: 1px solid #d1d5db;
+            padding: 10px 40px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-done:hover {
+            background-color: #d1d5db;
+        }
+    </style>
+</head>
+<body>
+
+  <div class="container" id="formContainer">
+    <h2>Clinic Visit Log Form</h2>
+    <hr>
+
+    <form id="visitForm">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="name" placeholder="e.g. Juan dela Cruz" required>
+        </div>
+
+        <div class="form-group">
+          <label>Student / Staff ID</label>
+          <input type="text" id="id" placeholder="e.g. 21-00123" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Course / Department</label>
+          <select id="department" required>
+            <option value="">— Select Department —</option>
+            <option>BSIT</option>
+            <option>BSCS</option>
+            <option>BSED</option>
+            <option>BSN</option>
+            <option>CBA</option>
+            <option>BSEE</option>
+            <option>BSBA</option>
+            <option>BSE</option>
+            <option>ADMIN</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Purpose of Visit</label>
+          <select id="purpose" required>
+            <option value="">— Select Purpose —</option>
+            <option>Consultation</option>
+            <option>Medical Certificate</option>
+            <option>Treatment</option>
+            <option>Follow-up</option>
+            <option>Check up</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Chief Complaint</label>
+        <textarea id="complaint" placeholder="Briefly describe your symptoms or reason for visiting the clinic today..." required></textarea>
+      </div>
+
+      <div class="buttons">
+        <button type="submit" class="submit-btn">Submit</button>
+        <button type="button" class="clear-btn" onclick="clearForm()">Clear</button>
+      </div>
+
+      <div class="note">
+        * All fields are required. Time of visit is automatically recorded upon submission.
+      </div>
+
+    </form>
+  </div>
+
+  <div id="confirmationContainer" class="confirmation-card">
+      <div class="icon-container">
+          <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+          </svg>
+      </div>
+
+      <h2>Your visit has been recorded.</h2>
+      <p class="subtitle">Please wait — clinic staff will attend to you shortly.</p>
+
+      <div class="details-box">
+          <div class="detail-row">
+              <span class="detail-label">Name:</span>
+              <span class="detail-value" id="confirmName"></span>
+          </div>
+          <div class="detail-row">
+              <span class="detail-label">Time In:</span>
+              <span class="detail-value" id="confirmTime"></span>
+          </div>
+          <div class="detail-row">
+              <span class="detail-label">Purpose:</span>
+              <span class="detail-value" id="confirmPurpose"></span>
+          </div>
+      </div>
+
+      <button class="btn-done" onclick="resetToForm()">Done</button>
+  </div>
+
+  <script>
+    document.getElementById("visitForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // Prevent page reload
+
+      // 1. Get the data the user typed in
+      const nameValue = document.getElementById("name").value;
+      const purposeValue = document.getElementById("purpose").value;
+
+      // 2. Format the current date and time to look like "09:14 AM, April 4, 2026"
+      const now = new Date();
+      const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const dateString = now.toLocaleDateString([], { month: 'long', day: 'numeric', year: 'numeric' });
+      const formattedTime = `${timeString}, ${dateString}`;
+
+      // 3. Inject the data into the confirmation screen
+      document.getElementById("confirmName").textContent = nameValue;
+      document.getElementById("confirmPurpose").textContent = purposeValue;
+      document.getElementById("confirmTime").textContent = formattedTime;
+
+      // 4. Hide the form and show the confirmation card
+      document.getElementById("formContainer").style.display = "none";
+      document.getElementById("confirmationContainer").style.display = "block";
+    });
+
+    function clearForm() {
+      document.getElementById("visitForm").reset();
+    }
+
+    // Function to go back to the original state
+    function resetToForm() {
+      document.getElementById("visitForm").reset(); // Clear the form completely
+      document.getElementById("confirmationContainer").style.display = "none"; // Hide confirmation
+      document.getElementById("formContainer").style.display = "block"; // Show the empty form again
+    }
+  </script>
+
+</body>
+</html>
