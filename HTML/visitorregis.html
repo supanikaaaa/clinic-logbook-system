@@ -102,10 +102,18 @@
                     </div>
 
                     <div class="input-group full-width">
-                        <label>NOTES / CHIEF COMPLAINT</label>
+                        <label>CHIEF COMPLAINT</label>
                         <div class="input-wrapper textarea-wrapper">
                             <i class="fa-solid fa-bars-staggered"></i>
-                            <textarea id="notes" rows="3" placeholder="Briefly describe what you're feeling..."></textarea>
+                            <textarea id="notes" rows="1" placeholder="Briefly describe your symptoms or reason for visiting the clinic today..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group full-width">
+                        <label>TIME IN (AUTO-GENERATED)</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-clock"></i>
+                            <input type="text" id="timeDisplay" readonly style="background-color: #f1f5f9; color: #64748b; cursor: not-allowed; font-weight: 500;">
                         </div>
                     </div>
 
@@ -124,6 +132,11 @@
     </main>
 
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const timeDisplay = document.getElementById('timeDisplay');
+            timeDisplay.value = formatTime(new Date()) + " — System Time";
+        });
+
         function handleSubmit(event) {
             event.preventDefault();
 
@@ -136,14 +149,21 @@
                 }
             }
 
+            // Capture the exact moment of submission
+            const submitTime = new Date();
+            
+            // Update the visual field just before redirection
+            document.getElementById('timeDisplay').value = formatTime(submitTime);
+
             // Gather form data and pass to confirmation page via sessionStorage
             const data = {
-                fullName:   document.getElementById('fullName').value,
-                schoolId:   document.getElementById('schoolId').value,
-                department: document.getElementById('department').options[document.getElementById('department').selectedIndex].text,
-                purpose:    document.getElementById('purpose').options[document.getElementById('purpose').selectedIndex].text,
-                refCode:    '#VIS-2026-' + Math.floor(1000 + Math.random() * 9000),
-                time:       formatTime(new Date())
+                fullName:       document.getElementById('fullName').value,
+                schoolId:       document.getElementById('schoolId').value,
+                department:     document.getElementById('department').options[document.getElementById('department').selectedIndex].text,
+                purpose:        document.getElementById('purpose').options[document.getElementById('purpose').selectedIndex].text,
+                chiefComplaint: document.getElementById('notes').value, // <-- Added this line to capture the complaint
+                refCode:        '#VIS-2026-' + Math.floor(1000 + Math.random() * 9000),
+                time:           formatTime(submitTime)
             };
 
             sessionStorage.setItem('visitData', JSON.stringify(data));
