@@ -1,0 +1,33 @@
+<?php
+session_start();
+require 'db_connect.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $staffId = $_POST['staffId'];
+    $securityKey = $_POST['securityKey'];
+
+    // Query to check if the staff ID and password match the database
+    $sql = "SELECT * FROM clinic_staff WHERE staff_id = ? AND security_key = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $staffId, $securityKey);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        // SUCCESS: They ARE in the database!
+        echo "<script>
+                alert('Design mockup — staff dashboard coming soon.');
+                window.location.href='clinic.html';
+              </script>";
+    } else {
+        // FAIL: They are NOT in the database
+        echo "<script>
+                alert('You are not eligible to login. Invalid Personnel ID or Security Key.');
+                window.location.href='clinic.html';
+              </script>";
+    }
+    
+    $stmt->close();
+    $conn->close();
+}
+?>
