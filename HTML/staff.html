@@ -30,7 +30,7 @@
 
         /* NEW: Staff Logo Image Styling */
         .staff-logo {
-            width: 140px; /* Made slightly larger than the old box so the logo text is readable */
+            width: 140px; 
             height: auto;
             display: block;
             margin: 0 auto 20px auto;
@@ -113,15 +113,15 @@
 
         <h2>Staff Login</h2>
 
-        <form action="#" method="POST">
+        <form action="process_login.php" method="POST">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                <label for="username">Personnel ID</label>
+                <input type="text" id="username" name="staffId" placeholder="e.g. STAFF-0922" required>
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="••••••••" required>
+                <input type="password" id="password" name="securityKey" placeholder="••••••••" required>
             </div>
 
             <button type="submit" class="login-btn">Login</button>
